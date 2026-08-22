@@ -68,7 +68,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8 }}
-            className="bg-cardNavy/30 border border-white/5 rounded-3xl p-6 sm:p-10 shadow-xl shadow-black/30 hover:border-awsOrange/20 transition-all duration-300 mb-12 relative overflow-hidden"
+            className="w-full min-w-0 bg-cardNavy/30 border border-white/5 rounded-3xl p-6 sm:p-10 shadow-xl shadow-black/30 hover:border-awsOrange/20 transition-all duration-300 mb-12 relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-awsOrange/30 to-azureBlue/30" />
             
@@ -168,7 +168,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.8, delay: idx * 0.1 }}
-              className="bg-cardNavy/30 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/30 hover:border-azureBlue/20 transition-all duration-300 flex flex-col justify-between"
+              className="w-full min-w-0 bg-cardNavy/30 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/30 hover:border-azureBlue/20 transition-all duration-300 flex flex-col justify-between"
             >
               <div className="space-y-5">
                 {/* Header */}

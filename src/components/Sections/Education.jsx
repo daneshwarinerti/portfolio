@@ -31,7 +31,7 @@ export default function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="bg-cardNavy/40 border border-white/5 rounded-3xl p-8 sm:p-10 flex flex-col gap-6 relative shadow-xl shadow-black/30 overflow-hidden hover:border-azureBlue/30 hover:shadow-azureBlue/[0.03] transition-all duration-300"
+            className="bg-cardNavy/40 border border-white/5 rounded-3xl p-6 sm:p-10 flex flex-col gap-6 relative shadow-xl shadow-black/30 overflow-hidden hover:border-azureBlue/30 hover:shadow-azureBlue/[0.03] transition-all duration-300"
           >
             {/* Header cap badge */}
             <div className="w-14 h-14 rounded-2xl bg-azureBlue/10 border border-azureBlue/25 flex items-center justify-center text-azureBlue flex-shrink-0">

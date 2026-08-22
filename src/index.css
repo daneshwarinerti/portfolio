@@ -20,14 +20,22 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--color-bg-deep);
   color: #f1f5f9;
   font-family: 'Inter', sans-serif;
+  max-width: 100%;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Custom Scrollbar */

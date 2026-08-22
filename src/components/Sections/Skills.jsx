@@ -57,7 +57,7 @@ export default function Skills() {
                 borderColor: 'rgba(255, 153, 0, 0.15)',
                 boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)'
               }}
-              className="bg-cardNavy/40 border border-white/5 rounded-2xl p-6 flex flex-col space-y-4 shadow-lg shadow-black/20 transition-all duration-300 relative overflow-hidden"
+              className="w-full min-w-0 bg-cardNavy/40 border border-white/5 rounded-2xl p-6 flex flex-col space-y-4 shadow-lg shadow-black/20 transition-all duration-300 relative overflow-hidden"
             >
               {/* Top accent glow line for cards */}
               <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-awsOrange/20 to-azureBlue/20" />

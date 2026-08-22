@@ -42,14 +42,14 @@ export default function Experience() {
                 borderColor: 'rgba(255, 153, 0, 0.2)',
                 boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)'
               }}
-              className="bg-cardNavy/50 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/35 transition-all duration-300 relative overflow-hidden"
+              className="w-full min-w-0 bg-cardNavy/50 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/35 transition-all duration-300 relative overflow-hidden"
             >
               {/* Decorative accent glow border on top */}
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-awsOrange/50 to-azureBlue/50" />
 
               {/* Card Header Section */}
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-white/5 pb-6">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   {/* Black Logo Container for Infobell Brand */}
                   {exp.companyLogo && (
                     <div className="w-[90px] h-[90px] bg-[#000000] rounded-[20px] flex items-center justify-center flex-shrink-0">
@@ -80,7 +80,7 @@ export default function Experience() {
                 </div>
 
                 {/* Duration Badge */}
-                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full text-xs font-mono font-bold text-awsOrange self-start md:self-center shadow-inner whitespace-nowrap">
+                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-mono font-bold text-awsOrange self-start md:self-center shadow-inner whitespace-normal min-[375px]:whitespace-nowrap">
                   <Briefcase className="w-3.5 h-3.5 flex-shrink-0" />
                   <span>{exp.duration}</span>
                 </div>

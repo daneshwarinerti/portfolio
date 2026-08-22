@@ -72,7 +72,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-cardNavy/40 border border-white/5 rounded-2xl p-8 sm:p-10 flex flex-col items-center justify-center shadow-xl shadow-black/30 relative"
+            className="w-full min-w-0 bg-cardNavy/40 border border-white/5 rounded-2xl p-6 sm:p-10 flex flex-col items-center justify-center shadow-xl shadow-black/30 relative"
           >
             {/* Visual Title */}
             <div className="w-full text-left mb-6">
