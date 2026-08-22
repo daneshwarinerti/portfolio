@@ -57,14 +57,14 @@ export default function Hero() {
   return (
     <section 
       id="hero" 
-      className="min-h-screen flex items-center relative overflow-hidden pt-28 pb-16"
+      className="min-h-fit md:min-h-screen flex items-center relative overflow-hidden pt-20 pb-12 md:pt-28 md:pb-16"
     >
       {/* Background Radial Glow */}
       <div className="radial-glow top-[-10%] left-[-10%] bg-[radial-gradient(circle,rgba(255,153,0,0.08)_0%,rgba(5,8,17,0)_70%)]" />
       <div className="radial-glow bottom-[10%] right-[-10%] bg-[radial-gradient(circle,rgba(0,120,212,0.08)_0%,rgba(5,8,17,0)_70%)]" />
 
       <div className="max-w-6xl mx-auto px-6 w-full relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
           
           {/* Hero Left Content Column (7 cols on desktop) */}
           <motion.div
@@ -167,7 +167,7 @@ export default function Hero() {
             className="md:col-span-5 flex justify-center items-center relative"
           >
             {/* Glowing circular container */}
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full border-2 border-awsOrange/20 shadow-[0_0_50px_rgba(255,153,0,0.15)] flex justify-center items-center transition-all duration-500 hover:border-awsOrange/40 hover:shadow-[0_0_60px_rgba(255,153,0,0.25)]">
+            <div className="relative w-48 h-48 min-[375px]:w-56 min-[375px]:h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full border-2 border-awsOrange/20 shadow-[0_0_50px_rgba(255,153,0,0.15)] flex justify-center items-center transition-all duration-500 hover:border-awsOrange/40 hover:shadow-[0_0_60px_rgba(255,153,0,0.25)]">
               
               {/* Profile Image container */}
               <div className="w-[93%] h-[93%] rounded-full overflow-hidden bg-cardNavy border border-white/5 relative">
