@@ -57,21 +57,21 @@ export default function Hero() {
   return (
     <section 
       id="hero" 
-      className="min-h-fit md:min-h-screen flex items-center relative overflow-hidden pt-20 pb-12 md:pt-28 md:pb-16"
+      className="min-h-0 md:min-h-screen flex items-center relative overflow-hidden pt-20 pb-8 md:pt-28 md:pb-16"
     >
       {/* Background Radial Glow */}
       <div className="radial-glow top-[-10%] left-[-10%] bg-[radial-gradient(circle,rgba(255,153,0,0.08)_0%,rgba(5,8,17,0)_70%)]" />
       <div className="radial-glow bottom-[10%] right-[-10%] bg-[radial-gradient(circle,rgba(0,120,212,0.08)_0%,rgba(5,8,17,0)_70%)]" />
 
       <div className="max-w-6xl mx-auto px-6 w-full relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 items-center">
           
           {/* Hero Left Content Column (7 cols on desktop) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="md:col-span-7 space-y-6 text-left"
+            className="md:col-span-7 space-y-4 md:space-y-6 text-left"
           >
             {/* Tag Badge */}
             <motion.div
@@ -104,7 +104,7 @@ export default function Hero() {
             </p>
 
             {/* Actions Bar (Three Buttons: View Projects, Resume, Contact) */}
-            <div className="flex flex-wrap gap-4 pt-2">
+            <div className="flex flex-wrap gap-3 pt-1 md:pt-2">
               <a 
                 href="#projects" 
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-awsOrange to-azureBlue hover:from-awsOrange/90 hover:to-azureBlue/90 text-white font-semibold font-heading text-sm transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-awsOrange/10"
@@ -127,7 +127,7 @@ export default function Hero() {
             </div>
 
             {/* Social Icons Strip */}
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-3 pt-2 md:pt-4">
               <span className="text-[10px] font-mono text-textDim tracking-widest uppercase">
                 CONNECT //
               </span>
