@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 
-// Local SVG icon since lucide-react in this environment is an older version that lacks this brand.
-const GithubIcon = ({ size = 20, ...props }) => (
+// Local SVG icons for clean vector visualization
+const GithubIcon = ({ size = 18, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -21,28 +20,30 @@ const GithubIcon = ({ size = 20, ...props }) => (
   </svg>
 );
 
+const Arrow = () => (
+  <>
+    <span className="text-white/30 font-bold sm:inline hidden mx-1 select-none">➔</span>
+    <span className="text-white/30 font-bold sm:hidden block my-1 select-none">↓</span>
+  </>
+);
+
 export default function Projects() {
   const projects = portfolioData.projects;
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: (idx) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 60,
-        damping: 15,
-        delay: idx * 0.15
-      }
-    })
-  };
+  // Find the EKS monitoring project to make it the featured case study
+  const featuredProject = projects.find(p => p.id === "project-1") || projects[0];
+  // Filter the grid projects (Voting App and DevSecOps)
+  const gridProjects = projects.filter(p => p.id !== "project-1");
 
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="radial-glow bottom-[20%] left-[-15%] bg-[radial-gradient(circle,rgba(0,120,212,0.05)_0%,rgba(5,8,17,0)_70%)]" />
+    <section id="projects" className="py-24 relative overflow-hidden">
+      {/* Background Radial Glow */}
+      <div className="radial-glow top-[30%] left-[-15%] bg-[radial-gradient(circle,rgba(255,153,0,0.03)_0%,rgba(5,8,17,0)_70%)]" />
+      <div className="radial-glow bottom-[30%] right-[-15%] bg-[radial-gradient(circle,rgba(0,120,212,0.03)_0%,rgba(5,8,17,0)_70%)]" />
 
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -51,108 +52,204 @@ export default function Projects() {
           className="text-center space-y-4 mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-extrabold font-heading text-white">
-            Featured <span className="bg-gradient-to-r from-awsOrange to-azureBlue bg-clip-text text-transparent">Projects</span>
+            Systems & <span className="bg-gradient-to-r from-awsOrange to-azureBlue bg-clip-text text-transparent">Deployments</span>
           </h2>
           <p className="text-lightGray max-w-xl mx-auto text-sm sm:text-base">
-            Demonstrating hands-on cloud systems engineering, serverless compute pipelines, and container deployment models.
+            Detailed engineering architectures, pipeline configurations, and observability setups built on AWS.
           </p>
         </motion.div>
 
-        {/* Project grid container */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {projects.map((project, idx) => (
-            <motion.div
-              key={project.id}
-              custom={idx}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-              variants={cardVariants}
-              whileHover={{ y: -8 }}
-              className={`bg-cardNavy/40 border border-white/5 rounded-2xl overflow-hidden flex flex-col shadow-lg shadow-black/20 hover:shadow-2xl transition-all duration-300 ${
-                idx % 2 === 0 
-                  ? 'hover:border-awsOrange/30 hover:shadow-awsOrange/[0.03]' 
-                  : 'hover:border-azureBlue/30 hover:shadow-azureBlue/[0.03]'
-              }`}
-            >
-              {/* Image box */}
-              <div className="h-56 relative overflow-hidden bg-deepNavy">
-                <img
-                  src={project.imageUrl}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-                
-                {/* Visual overlay tag */}
-                <div 
-                  className={`absolute top-4 left-4 bg-deepNavy/90 border border-white/5 rounded-md px-3 py-1 font-mono text-[10px] font-semibold tracking-wider ${
-                    idx % 2 === 0 ? 'text-awsOrange' : 'text-azureBlue'
-                  }`}
-                >
-                  INFRASTRUCTURE // 0{idx + 1}
+        {/* ==================================================
+            FEATURED PROJECT 1 — HORIZONTAL CASE STUDY
+            ================================================== */}
+        {featuredProject && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.8 }}
+            className="bg-cardNavy/30 border border-white/5 rounded-3xl p-6 sm:p-10 shadow-xl shadow-black/30 hover:border-awsOrange/20 transition-all duration-300 mb-12 relative overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-awsOrange/30 to-azureBlue/30" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column: Details */}
+              <div className="lg:col-span-6 space-y-6">
+                <div>
+                  <span className="font-mono text-[9px] text-awsOrange uppercase tracking-wider block mb-1">
+                    // FEATURED CASE STUDY
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-extrabold font-heading text-white tracking-tight">
+                    {featuredProject.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-x-2 gap-y-1 pt-1.5 text-xs text-lightGray/70 font-semibold font-mono">
+                    <span>Amazon EKS</span> • <span>Kubernetes</span> • <span>Docker</span> • <span>Helm</span>
+                  </div>
+                </div>
+
+                <p className="text-lightGray text-sm leading-relaxed">
+                  {featuredProject.description}
+                </p>
+
+                <div className="space-y-3 pt-2">
+                  <h4 className="text-[10px] font-mono text-textDim uppercase tracking-wider font-semibold">
+                    Deployment Highlights:
+                  </h4>
+                  <ul className="space-y-2 text-xs text-lightGray">
+                    {featuredProject.features.slice(0, 3).map((feat, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <span className="text-awsOrange font-bold select-none">•</span>
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="pt-4">
+                  <a
+                    href={featuredProject.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold font-heading text-xs transition-all duration-200"
+                  >
+                    <GithubIcon /> View Repository
+                  </a>
                 </div>
               </div>
 
-              {/* Detail body */}
-              <div className="p-8 flex flex-col flex-grow space-y-5">
-                <h3 className="text-xl font-bold font-heading text-white">
-                  {project.title}
-                </h3>
-                
-                <p className="text-lightGray text-sm leading-relaxed">
+              {/* Right Column: Visual Architecture flows */}
+              <div className="lg:col-span-6 space-y-5 bg-black/20 border border-white/5 p-6 rounded-2xl">
+                <span className="font-mono text-[10px] text-textDim tracking-widest uppercase block mb-1">
+                  SYSTEM ARCHITECTURE FLOW
+                </span>
+
+                {/* Flow 1: Build & Deploy */}
+                <div className="space-y-2 font-mono">
+                  <span className="text-[9px] text-awsOrange uppercase tracking-wider block">// CI/CD & Deploy Flow</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center flex-wrap gap-y-1 gap-x-1.5 text-[11px] text-white">
+                    <div className="px-2 py-1 bg-deepNavy border border-white/5 rounded">GitHub Actions</div>
+                    <Arrow />
+                    <div className="px-2 py-1 bg-deepNavy border border-white/5 rounded">Docker Build</div>
+                    <Arrow />
+                    <div className="px-2 py-1 bg-deepNavy border border-white/5 rounded">Amazon ECR</div>
+                    <Arrow />
+                    <div className="px-2 py-1 bg-deepNavy border border-awsOrange/20 rounded text-awsOrange">Amazon EKS</div>
+                    <Arrow />
+                    <div className="px-2 py-1 bg-deepNavy border border-white/5 rounded">ALB Ingress</div>
+                  </div>
+                </div>
+
+                {/* Flow 2: Observability */}
+                <div className="space-y-2 font-mono pt-3 border-t border-white/5">
+                  <span className="text-[9px] text-azureBlue uppercase tracking-wider block">// Observability flow</span>
+                  <div className="flex flex-col sm:flex-row sm:items-center flex-wrap gap-y-1 gap-x-1.5 text-[11px] text-white">
+                    <div className="px-2 py-1 bg-deepNavy border border-azureBlue/25 rounded text-azureBlue">Amazon EKS</div>
+                    <Arrow />
+                    <div className="px-2 py-1 bg-deepNavy border border-white/5 rounded">Prometheus</div>
+                    <Arrow />
+                    <div className="px-2 py-1 bg-deepNavy border border-white/5 rounded">Grafana</div>
+                    <Arrow />
+                    <div className="px-2 py-1 bg-deepNavy border border-white/5 rounded">Alertmanager</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ==================================================
+            GRID PROJECTS 2 & 3
+            ================================================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {gridProjects.map((project, idx) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, delay: idx * 0.1 }}
+              className="bg-cardNavy/30 border border-white/5 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/30 hover:border-azureBlue/20 transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-5">
+                {/* Header */}
+                <div>
+                  <span className="font-mono text-[9px] text-azureBlue uppercase tracking-wider block mb-1">
+                    // CASE STUDY // 0{idx + 2}
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold font-heading text-white tracking-tight">
+                    {project.title}
+                  </h3>
+                </div>
+
+                <p className="text-lightGray text-xs sm:text-sm leading-relaxed">
                   {project.description}
                 </p>
 
-                {/* Features points list */}
-                <ul className="space-y-2.5 text-xs text-textDim flex-grow">
-                  {project.features.map((feature, fIdx) => (
-                    <li 
-                      key={fIdx} 
-                      className="flex items-start gap-2.5"
-                    >
-                      <span className={`font-bold ${idx % 2 === 0 ? 'text-awsOrange' : 'text-azureBlue'}`}>•</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Visual Architecture block */}
+                {project.id === "project-2" ? (
+                  /* Project 2: AWS Voting App */
+                  <div className="bg-black/20 border border-white/5 p-5 rounded-2xl space-y-4 font-mono">
+                    <span className="font-mono text-[9px] text-textDim tracking-wider uppercase block">// INFRASTRUCTURE MAP</span>
+                    
+                    <div className="space-y-2 text-[10px]">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-x-1.5 gap-y-0.5 text-white">
+                        <div className="px-2 py-0.5 bg-deepNavy border border-white/5 rounded">Terraform</div>
+                        <Arrow />
+                        <div className="px-2 py-0.5 bg-deepNavy border border-white/5 rounded">AWS VPC</div>
+                        <Arrow />
+                        <div className="px-2 py-0.5 bg-deepNavy border border-azureBlue/20 rounded text-azureBlue font-semibold">ECS Fargate</div>
+                      </div>
 
-                {/* Tech Pills tag stack */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[10px] font-mono font-medium px-2.5 py-1 bg-white/[0.02] border border-white/5 rounded text-white"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                      <div className="pt-2 border-t border-white/5">
+                        <span className="text-[8px] text-azureBlue uppercase block mb-1.5">// ECS CONTAINER DEPENDENCIES:</span>
+                        <div className="grid grid-cols-3 gap-2 text-center text-[9px] text-white/90">
+                          <div className="py-1 bg-deepNavy/60 border border-white/5 rounded">Amazon ECR</div>
+                          <div className="py-1 bg-deepNavy/60 border border-white/5 rounded">RDS Postgres</div>
+                          <div className="py-1 bg-deepNavy/60 border border-white/5 rounded">ElastiCache</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* Project 3: DevSecOps CI/CD Pipeline */
+                  <div className="bg-black/20 border border-white/5 p-5 rounded-2xl space-y-4 font-mono text-[10px]">
+                    <span className="font-mono text-[9px] text-textDim tracking-wider uppercase block">// CI/CD PIPELINE STAGES</span>
+                    
+                    <div className="flex flex-col items-center gap-1.5 text-center text-white">
+                      <div className="px-2.5 py-0.5 bg-deepNavy border border-white/5 rounded w-full sm:w-auto">GitHub Trigger</div>
+                      <span className="text-white/20">↓</span>
+                      <div className="px-2.5 py-0.5 bg-deepNavy border border-white/5 rounded w-full sm:w-auto">Actions Runner</div>
+                      <span className="text-white/20">↓</span>
+                      
+                      {/* Security scans box */}
+                      <div className="py-2 px-3 bg-red-950/15 border border-red-500/20 rounded-xl w-full">
+                        <span className="text-[8px] text-red-400 font-semibold uppercase tracking-wider block mb-1">// SECURITY SCAN GATES</span>
+                        <div className="flex flex-wrap justify-center gap-1.5 text-[8px]">
+                          <span className="px-1.5 py-0.5 bg-red-500/10 border border-red-500/25 rounded text-red-300">Trivy</span>
+                          <span className="px-1.5 py-0.5 bg-red-500/10 border border-red-500/25 rounded text-red-300">Gitleaks</span>
+                          <span className="px-1.5 py-0.5 bg-red-500/10 border border-red-500/25 rounded text-red-300">pip-audit</span>
+                        </div>
+                      </div>
+                      
+                      <span className="text-white/20">↓</span>
+                      <div className="px-2.5 py-0.5 bg-deepNavy border border-awsOrange/20 rounded text-awsOrange w-full sm:w-auto">Docker Build & ECR</div>
+                      <span className="text-white/20">↓</span>
+                      <div className="px-2.5 py-0.5 bg-deepNavy border border-white/5 rounded w-full sm:w-auto">ECS Fargate Deployment</div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
-                {/* CTA Links Bar */}
-                <div className="flex gap-4 pt-4 border-t border-white/5">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-grow inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold font-heading text-xs transition-all duration-200"
-                  >
-                    <GithubIcon size={14} /> View Repository
-                  </a>
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 font-semibold font-heading text-xs text-white transition-all duration-200 ${
-                        idx % 2 === 0 
-                          ? 'hover:border-awsOrange hover:text-awsOrange' 
-                          : 'hover:border-azureBlue hover:text-azureBlue'
-                      }`}
-                    >
-                      <ExternalLink size={14} /> Live Demo
-                    </a>
-                  )}
-                </div>
+              {/* Action Bar */}
+              <div className="pt-6 mt-6 border-t border-white/5">
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold font-heading text-xs transition-all duration-200"
+                >
+                  <GithubIcon /> View Repository
+                </a>
               </div>
             </motion.div>
           ))}
