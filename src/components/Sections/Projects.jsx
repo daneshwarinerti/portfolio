@@ -134,22 +134,24 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold font-heading text-xs transition-all duration-200"
+                    className="flex-grow inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold font-heading text-xs transition-all duration-200"
                   >
-                    <GithubIcon size={14} /> View Code
+                    <GithubIcon size={14} /> View Repository
                   </a>
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 font-semibold font-heading text-xs text-white transition-all duration-200 ${
-                      idx % 2 === 0 
-                        ? 'hover:border-awsOrange hover:text-awsOrange' 
-                        : 'hover:border-azureBlue hover:text-azureBlue'
-                    }`}
-                  >
-                    <ExternalLink size={14} /> Live Demo
-                  </a>
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 font-semibold font-heading text-xs text-white transition-all duration-200 ${
+                        idx % 2 === 0 
+                          ? 'hover:border-awsOrange hover:text-awsOrange' 
+                          : 'hover:border-azureBlue hover:text-azureBlue'
+                      }`}
+                    >
+                      <ExternalLink size={14} /> Live Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

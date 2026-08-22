@@ -1,54 +1,28 @@
 import { motion } from 'framer-motion';
-import { 
-   SiDocker, SiTerraform, SiJenkins 
-} from 'react-icons/si';
-import { FaAws } from 'react-icons/fa';
 import { portfolioData } from '../../data/portfolioData';
-
-// Monitoring & Logging SVG (Line Chart)
-const MonitoringIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-12 h-12 stroke-purple-400 fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M3 3v18h18" />
-    <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />
-    <path d="M15 8h3.7V11.7" />
-  </svg>
-);
 
 export default function Skills() {
   const skillsList = portfolioData.skills;
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: (index) => ({
       opacity: 1,
       y: 0,
       transition: {
         type: 'spring',
-        bounce: 0.1,
-        duration: 0.6,
-        delay: index * 0.1
+        stiffness: 70,
+        damping: 15,
+        delay: index * 0.05
       }
     })
   };
 
-  const getIcon = (type) => {
-    switch (type) {
-      case 'jenkins':
-        return <SiJenkins className="w-12 h-12 text-purple-400" />;
-      case 'terraform':
-        return <SiTerraform className="w-12 h-12 text-purple-400" />;
-      case 'docker':
-        return <SiDocker className="w-12 h-12 text-purple-400" />;
-      case 'aws':
-        return <FaAws className="w-12 h-12 text-purple-400" />;
-      default:
-        return <MonitoringIcon />;
-    }
-  };
-
   return (
-    <section id="skills" className="py-24 relative">
-      <div className="radial-glow top-[10%] left-[-15%] bg-[radial-gradient(circle,rgba(168,85,247,0.04)_0%,rgba(5,8,17,0)_70%)]" />
+    <section id="skills" className="py-24 relative overflow-hidden">
+      {/* Background Radial Glow */}
+      <div className="radial-glow top-[15%] left-[-10%] bg-[radial-gradient(circle,rgba(255,153,0,0.03)_0%,rgba(5,8,17,0)_70%)]" />
+      <div className="radial-glow bottom-[15%] right-[-10%] bg-[radial-gradient(circle,rgba(0,120,212,0.03)_0%,rgba(5,8,17,0)_70%)]" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
@@ -61,44 +35,54 @@ export default function Skills() {
           className="text-center space-y-4 mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-extrabold font-heading text-white">
-            My <span className="bg-gradient-to-r from-awsOrange to-azureBlue bg-clip-text text-transparent">Skills</span>
+            Technical <span className="bg-gradient-to-r from-awsOrange to-azureBlue bg-clip-text text-transparent">Skills</span>
           </h2>
           <p className="text-lightGray max-w-xl mx-auto text-sm sm:text-base">
-            Core areas of specialization validating cloud administration, infrastructure automation, SRE workflows, and continuous integration.
+            Categorized directory of core cloud technologies, pipeline integrations, and automation workflows from my resume.
           </p>
         </motion.div>
 
-        {/* Skills Cards Grid - 3 columns top row, 2 columns bottom row centered */}
-        <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
-          {skillsList.map((skill, index) => (
+        {/* Skills Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillsList.map((skillGroup, index) => (
             <motion.div
-              key={skill.id}
+              key={skillGroup.category}
               custom={index}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
               variants={cardVariants}
               whileHover={{ 
-                y: -6,
-                borderColor: 'rgba(168, 85, 247, 0.35)',
-                boxShadow: '0 15px 35px rgba(168, 85, 247, 0.05)'
+                y: -5,
+                borderColor: 'rgba(255, 153, 0, 0.15)',
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)'
               }}
-              className="w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.33%-22px)] bg-cardNavy/40 border border-white/5 hover:border-purple-500/20 rounded-3xl p-8 flex flex-col items-center text-center space-y-4 shadow-lg shadow-black/20 transition-all duration-300"
+              className="bg-cardNavy/40 border border-white/5 rounded-2xl p-6 flex flex-col space-y-4 shadow-lg shadow-black/20 transition-all duration-300 relative overflow-hidden"
             >
-              {/* Icon Container with purple branding styling */}
-              <div className="w-20 h-20 rounded-full bg-purple-500/5 border border-purple-500/10 flex items-center justify-center mb-2 shadow-[0_0_20px_rgba(168,85,247,0.03)]">
-                {getIcon(skill.type)}
+              {/* Top accent glow line for cards */}
+              <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-awsOrange/20 to-azureBlue/20" />
+
+              {/* Category Header */}
+              <div className="space-y-1">
+                <span className="font-mono text-[9px] text-awsOrange uppercase tracking-wider">
+                  // {index + 1}. CATEGORY
+                </span>
+                <h3 className="text-base sm:text-lg font-bold font-heading text-white tracking-tight">
+                  {skillGroup.category}
+                </h3>
               </div>
 
-              {/* Title */}
-              <h3 className="text-lg font-bold font-heading text-white">
-                {skill.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-lightGray text-xs sm:text-sm leading-relaxed max-w-xs">
-                {skill.description}
-              </p>
+              {/* Skills Tags List */}
+              <div className="flex flex-wrap gap-2 pt-2">
+                {skillGroup.items.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-xs sm:text-sm font-medium text-lightGray hover:border-awsOrange/30 hover:text-white transition-all duration-200"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
